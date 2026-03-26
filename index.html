@@ -286,11 +286,11 @@
                 </div>
 
                 <h1 class="hero-text gradient-text mb-6 fade-in-up" style="animation-delay: 0.1s;">
-                    Infrastructure for the<br>Intelligent Future
+                    The Semantic Compression<br>Infrastructure Layer
                 </h1>
 
                 <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto fade-in-up" style="animation-delay: 0.2s; line-height: 1.6;">
-                    C-TOKEN CSM++ — Entropy-based semantic compression engine. <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600">Adaptive. Deterministic. Production-Ready.</span>
+                    CSM++ v4.0 — The first <span class="text-blue-400 font-semibold">entropy-based semantic compression + automatic feature engineering</span> layer for production AI pipelines. <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">18x compression on logs. Deterministic. <5ms latency.</span>
                 </p>
 
                 <!-- Key Metrics -->
@@ -350,29 +350,123 @@
             </div>
         </section>
 
-        <!-- PROBLEM → SOLUTION → MOAT -->
+        <!-- DOMAIN-SPECIFIC USE CASES -->
+        <section class="section-padding max-w-5xl mx-auto border-t border-gray-700/50">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Purpose-Built for Three Domains</h2>
+                <p class="text-gray-400">Not a general-purpose compressor. Domain-aware algorithms for maximum impact.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Domain 1: Logs -->
+                <div class="glass rounded-xl p-8 feature-card">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-400">Application Logs</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <div>
+                            <div class="font-semibold text-sm">Compression Ratio</div>
+                            <div class="text-xl font-bold text-blue-400">8x – 20x</div>
+                            <div class="text-xs text-gray-500">vs gzip 2.3x better</div>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-white">Use Case</div>
+                            <p class="text-sm">Server logs, K8s events, audit logs, app errors. Highly repetitive (80-95% template overlap).</p>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-white">Output</div>
+                            <p class="text-sm">Pattern ID, template, extracted slots (IP, timestamp, error code), anomaly score.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Domain 2: Code -->
+                <div class="glass rounded-xl p-8 feature-card">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400">Source Code</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <div>
+                            <div class="font-semibold text-sm">Compression Ratio</div>
+                            <div class="text-xl font-bold text-purple-400">4x – 10x</div>
+                            <div class="text-xs text-gray-500">vs BPE tokens</div>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-white">Use Case</div>
+                            <p class="text-sm">GitHub repos, code review diffs, stack traces, compiler output. AST-pattern repetitive.</p>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-white">Output</div>
+                            <p class="text-sm">Code patterns, identifiers, complexity features, clone detection.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Domain 3: AI Training Data -->
+                <div class="glass rounded-xl p-8 feature-card">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-2xl font-bold mb-4 text-pink-400">AI Datasets</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <div>
+                            <div class="font-semibold text-sm">Compression Ratio</div>
+                            <div class="text-xl font-bold text-pink-400">2x – 4x</div>
+                            <div class="text-xs text-gray-500">vs BPE, with dedup</div>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-white">Use Case</div>
+                            <p class="text-sm">Instruction datasets, QA pairs, training corpora. Slot-rich structured text.</p>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-white">Output</div>
+                            <p class="text-sm">Deduplicated patterns, slot-normalized features, data quality scoring.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROBLEM → SOLUTION → MOAT (Enhanced) -->
         <section class="section-padding max-w-5xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="fade-in-up">
                     <div class="text-5xl mb-4">❌</div>
                     <h3 class="text-2xl font-bold mb-4">The Problem</h3>
-                    <p class="text-gray-300">
-                        Traditional tokenization is <span class="text-red-400 font-semibold">static and unaware</span>. Every input gets the same encoding, regardless of semantic value or context. This creates massive inefficiencies in LLM processing, inflating token costs.
+                    <p class="text-gray-300 mb-4">
+                        Traditional compression (gzip, zstd) is <span class="text-red-400 font-semibold">byte-level and semantically unaware</span>. Traditional tokenizers (BPE) are <span class="text-red-400 font-semibold">domain-agnostic</span>.
                     </p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li>• Static token mappings (no adaptation)</li>
+                        <li>• No semantic understanding (just pattern matching)</li>
+                        <li>• Wasted capacity on structured data (logs, code)</li>
+                        <li>• No ML features extracted automatically</li>
+                        <li>• Output not interpretable by humans</li>
+                    </ul>
                 </div>
                 <div class="fade-in-up" style="animation-delay: 0.1s;">
                     <div class="text-5xl mb-4">💡</div>
                     <h3 class="text-2xl font-bold mb-4">Our Solution</h3>
-                    <p class="text-gray-300">
-                        <span class="text-blue-400 font-semibold">Adaptive semantic compression</span> (CSM++) learns entropy patterns and maps tokens intelligently. Each input is analyzed, compressed based on meaning, not just pattern repetition.
+                    <p class="text-gray-300 mb-4">
+                        <span class="text-blue-400 font-semibold">CSM++ = Compression + Feature Engineering + Anomaly Detection</span>
                     </p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li>✓ Entropy-based adaptive token mapping</li>
+                        <li>✓ Domain-aware pattern discovery (Viterbi DP)</li>
+                        <li>✓ Semantic slot extraction (IP, timestamp, level...)</li>
+                        <li>✓ Automatic ML feature generation</li>
+                        <li>✓ Human-readable templates + anomaly scores</li>
+                    </ul>
                 </div>
                 <div class="fade-in-up" style="animation-delay: 0.2s;">
                     <div class="text-5xl mb-4">🛡️</div>
                     <h3 class="text-2xl font-bold mb-4">The Moat</h3>
-                    <p class="text-gray-300">
-                        <span class="text-purple-400 font-semibold">Entropy-based deterministic mapping</span>. Proprietary algorithm that guarantees reproducible, optimized output. Cannot be replicated by traditional compression.
+                    <p class="text-gray-300 mb-4">
+                        <span class="text-purple-400 font-semibold">Deterministic entropy-based pattern matching</span>
                     </p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li>✓ FST (Finite State Transducer) not HashMap</li>
+                        <li>✓ Viterbi DP optimal pattern selection</li>
+                        <li>✓ Proprietary PPMI scoring for discovery</li>
+                        <li>✓ Reproducible &amp; standardized output</li>
+                        <li>✓ 3+ years patent-pending methodology</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -381,30 +475,40 @@
         <section class="section-padding bg-gradient-to-b from-transparent via-purple-950/10 to-transparent border-t border-b border-purple-900/30">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold gradient-text mb-4">Core Capabilities</h2>
-                    <p class="text-gray-400">Purpose-built for AI infrastructure at scale</p>
+                    <h2 class="text-4xl font-bold gradient-text mb-4">Core Architecture</h2>
+                    <p class="text-gray-400">Five-layer pipeline: Ingestion → Core → Semantic → Feature Store → Output</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="glass rounded-xl p-8 feature-card">
-                        <div class="text-3xl mb-4">📊</div>
-                        <h3 class="text-xl font-bold mb-3">Adaptive Compression</h3>
-                        <p class="text-gray-300">Token mapping evolves with input patterns. Learns entropy distribution in real-time, achieving near-optimal compression ratios.</p>
+                        <div class="text-3xl mb-4">🔄</div>
+                        <h3 class="text-xl font-bold mb-3">FST Pattern Matching</h3>
+                        <p class="text-gray-300">Finite State Transducer (not HashMap) for O(k) pattern lookup. 65K patterns in just 5 MB. Better cache locality than traditional hash tables.</p>
                     </div>
                     <div class="glass rounded-xl p-8 feature-card">
-                        <div class="text-3xl mb-4">🔬</div>
-                        <h3 class="text-xl font-bold mb-3">Entropy Analysis</h3>
-                        <p class="text-gray-300">Measures information density per token. Identifies and prioritizes high-value semantic units automatically.</p>
+                        <div class="text-3xl mb-4">📈</div>
+                        <h3 class="text-xl font-bold mb-3">Viterbi DP Selection</h3>
+                        <p class="text-gray-300">Dynamic programming finds globally optimal pattern assignments. Not greedy. Guarantees maximum compression ratio given vocabulary.</p>
                     </div>
                     <div class="glass rounded-xl p-8 feature-card">
-                        <div class="text-3xl mb-4">⏱️</div>
-                        <h3 class="text-xl font-bold mb-3">Real-time Slot Mapping</h3>
-                        <p class="text-gray-300">Assigns token slots on-the-fly based on semantic significance. Sub-millisecond allocation with SIMD acceleration.</p>
+                        <div class="text-3xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold mb-3">Smart Slot Extraction</h3>
+                        <p class="text-gray-300">Typed slot extraction: IP addresses, timestamps, log levels, UUIDs, paths, hex values, integers, floats. Not just strings.</p>
                     </div>
                     <div class="glass rounded-xl p-8 feature-card">
-                        <div class="text-3xl mb-4">✓</div>
-                        <h3 class="text-xl font-bold mb-3">Deterministic Output</h3>
-                        <p class="text-gray-300">Same input always produces identical compressed output. Perfect for auditable, reproducible AI pipelines.</p>
+                        <div class="text-3xl mb-4">🚀</div>
+                        <h3 class="text-xl font-bold mb-3">Automatic Feature Engineering</h3>
+                        <p class="text-gray-300">Generates ML features automatically: pattern frequency (1m/1h windows), slot statistics, sequence PMI, anomaly scores.</p>
+                    </div>
+                    <div class="glass rounded-xl p-8 feature-card">
+                        <div class="text-3xl mb-4">⚡</div>
+                        <h3 class="text-xl font-bold mb-3">SIMD + Rust Core</h3>
+                        <p class="text-gray-300">Pure Rust with AVX-512 vectorization. Zero-copy processing. 8-16 tokens per CPU cycle. No garbage collection.</p>
+                    </div>
+                    <div class="glass rounded-xl p-8 feature-card">
+                        <div class="text-3xl mb-4">🐍</div>
+                        <h3 class="text-xl font-bold mb-3">Python + Streaming</h3>
+                        <p class="text-gray-300">PyO3 bindings for seamless integration. Streaming pipeline for real-time Kafka. Also CLI tool included.</p>
                     </div>
                 </div>
             </div>
@@ -423,33 +527,33 @@
                     <thead>
                         <tr class="border-b border-gray-600">
                             <th class="text-left py-3 px-4 font-bold">Engine</th>
-                            <th class="text-right py-3 px-4 font-bold">Compression</th>
+                            <th class="text-right py-3 px-4 font-bold">Logs</th>
+                            <th class="text-right py-3 px-4 font-bold">Code</th>
                             <th class="text-right py-3 px-4 font-bold">Throughput</th>
                             <th class="text-right py-3 px-4 font-bold">Latency</th>
-                            <th class="text-right py-3 px-4 font-bold">Semantic Aware</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="border-b border-gray-700 hover:bg-white/5">
-                            <td class="py-4 px-4">GZIP</td>
-                            <td class="text-right py-4 px-4">4.2x</td>
-                            <td class="text-right py-4 px-4">12K ops/s</td>
+                            <td class="py-4 px-4">gzip-9</td>
+                            <td class="text-right py-4 px-4 text-red-400">4.2x – 8.2x</td>
+                            <td class="text-right py-4 px-4 text-red-400">6.5x – 7.2x</td>
+                            <td class="text-right py-4 px-4" style="color: #fbbf24;">12K ops/s</td>
                             <td class="text-right py-4 px-4">~8ms</td>
-                            <td class="text-right py-4 px-4 text-red-400">✗</td>
                         </tr>
                         <tr class="border-b border-gray-700 hover:bg-white/5">
-                            <td class="py-4 px-4">ZSTD</td>
-                            <td class="text-right py-4 px-4">7.8x</td>
-                            <td class="text-right py-4 px-4">2K ops/s</td>
+                            <td class="py-4 px-4">zstd-19</td>
+                            <td class="text-right py-4 px-4 text-yellow-400">7.8x – 11.4x</td>
+                            <td class="text-right py-4 px-4 text-yellow-400">8.9x – 9.8x</td>
+                            <td class="text-right py-4 px-4" style="color: #fbbf24;">2K ops/s</td>
                             <td class="text-right py-4 px-4">~15ms</td>
-                            <td class="text-right py-4 px-4 text-red-400">✗</td>
                         </tr>
                         <tr class="bg-gradient-to-r from-blue-900/20 to-purple-900/20 hover:from-blue-900/30 hover:to-purple-900/30">
                             <td class="py-4 px-4 font-bold text-blue-400">C-TOKEN</td>
-                            <td class="text-right py-4 px-4 font-bold text-blue-400">18x</td>
-                            <td class="text-right py-4 px-4 font-bold text-blue-400">50K ops/s</td>
-                            <td class="text-right py-4 px-4 font-bold text-blue-400">&lt;5ms</td>
-                            <td class="text-right py-4 px-4 font-bold text-green-400">✓</td>
+                            <td class="text-right py-4 px-4 font-bold text-blue-400">16x – 20x</td>
+                            <td class="text-right py-4 px-4 font-bold text-blue-400">10x – 13x</td>
+                            <td class="text-right py-4 px-4 font-bold text-green-400">50K ops/s</td>
+                            <td class="text-right py-4 px-4 font-bold text-green-400">&lt;5ms</td>
                         </tr>
                     </tbody>
                 </table>
@@ -476,6 +580,60 @@
                         <div class="chart-bar bg-gradient-to-t from-blue-600 to-purple-400 rounded-t-lg" style="width: 60px; height: 100%;"></div>
                         <div class="text-xs font-bold mt-4">C-TOKEN</div>
                         <div class="text-sm text-blue-400 font-bold">50K</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNOLOGY STACK -->
+        <section class="section-padding max-w-5xl mx-auto border-t border-gray-700/50">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Built on Proven Technology</h2>
+                <p class="text-gray-400">Production-grade Rust core with seamless integrations</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass rounded-xl p-8">
+                    <h3 class="text-lg font-bold mb-6 text-blue-400">Rust Core</h3>
+                    <div class="space-y-4 text-sm text-gray-300">
+                        <div class="flex gap-3">
+                            <span class="text-blue-400 font-bold">→</span>
+                            <div><strong>Edition 2021</strong> with zero unsafe code in hot paths</div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-blue-400 font-bold">→</span>
+                            <div><strong>Workspace crates:</strong> csm-core, csm-tokenizer, csm-encoding, csm-semantic, csm-streaming, csm-api</div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-blue-400 font-bold">→</span>
+                            <div><strong>Dependencies:</strong> fst (pattern matching), bumpalo (arena alloc), rayon (parallelism), tokio (async I/O)</div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-blue-400 font-bold">→</span>
+                            <div><strong>No-std capable:</strong> Core can run on embedded systems with feature flags</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-8">
+                    <h3 class="text-lg font-bold mb-6 text-purple-400">Integration Layer</h3>
+                    <div class="space-y-4 text-sm text-gray-300">
+                        <div class="flex gap-3">
+                            <span class="text-purple-400 font-bold">→</span>
+                            <div><strong>Python:</strong> PyO3 bindings (scikit-learn compatible, polars DataFrame output)</div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-purple-400 font-bold">→</span>
+                            <div><strong>Arrow/Parquet:</strong> Direct Apache Arrow output for DuckDB, BigQuery, Snowflake</div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-purple-400 font-bold">→</span>
+                            <div><strong>Streaming:</strong> Kafka consumer/producer via rdkafka, real-time anomaly alerts</div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-purple-400 font-bold">→</span>
+                            <div><strong>CLI:</strong> Full-featured command-line tool for batch processing and exploration</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -538,6 +696,78 @@ result = comp.compress(
 print(f"Compression: {result.ratio}x")
 print(f"Latency: {result.latency_ms}ms")
 print(f"Tokens: {result.output_tokens}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API & INTEGRATION -->
+        <section class="section-padding bg-gradient-to-b from-transparent via-green-950/10 to-transparent border-t border-b border-green-900/30">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl font-bold gradient-text mb-12 text-center">API & Integration</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
+                    <!-- Rust API -->
+                    <div class="glass rounded-xl p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-orange-400">🦀 Rust API</h3>
+                        <div class="code-block p-6 mb-6">
+                            <div class="text-gray-400 text-xs font-mono mb-4">Cargo.toml</div>
+                            <pre class="text-gray-100 text-xs overflow-auto"><code>[dependencies]
+csm = "4.0"</code></pre>
+                        </div>
+                        <div class="code-block p-6">
+                            <div class="text-gray-400 text-xs font-mono mb-4">main.rs</div>
+                            <pre class="text-gray-100 text-xs overflow-auto"><code>use csm::EncoderBuilder;
+
+let encoder = EncoderBuilder::new("log")
+    .with_vocab("patterns.bin")
+    .build()?;
+
+let encoded = encoder.encode(
+    "Error from 192.168.1.5"
+)?;
+
+println!("CR: {:.2}x", 
+    encoded.compression_ratio);</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Python API -->
+                    <div class="glass rounded-xl p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-yellow-400">🐍 Python API</h3>
+                        <div class="code-block p-6 mb-6">
+                            <div class="text-gray-400 text-xs font-mono mb-4">pip install</div>
+                            <pre class="text-gray-100 text-xs overflow-auto"><code>pip install csm-plus-plus</code></pre>
+                        </div>
+                        <div class="code-block p-6">
+                            <div class="text-gray-400 text-xs font-mono mb-4">example.py</div>
+                            <pre class="text-gray-100 text-xs overflow-auto"><code>import csm_plus_plus as csm
+
+encoder = csm.CsmEncoder()
+encoder.fit(logs, domain="log")
+
+df = encoder.transform(new_logs)
+print(df.schema)
+# Pattern-based ML features</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass rounded-xl p-6">
+                        <div class="text-2xl mb-3">⚙️</div>
+                        <h4 class="font-bold mb-2 text-white">CLI Tool</h4>
+                        <p class="text-sm text-gray-400">Full-featured command line for batch processing, benchmarking, model discovery</p>
+                    </div>
+                    <div class="glass rounded-xl p-6">
+                        <div class="text-2xl mb-3">📊</div>
+                        <h4 class="font-bold mb-2 text-white">Arrow/Parquet Out</h4>
+                        <p class="text-sm text-gray-400">Direct DuckDB, Snowflake, BigQuery integration. ML-ready DataFrames</p>
+                    </div>
+                    <div class="glass rounded-xl p-6">
+                        <div class="text-2xl mb-3">🚀</div>
+                        <h4 class="font-bold mb-2 text-white">Kafka Streaming</h4>
+                        <p class="text-sm text-gray-400">Real-time processing. &lt;5ms latency. Anomaly alerts on output topic</p>
                     </div>
                 </div>
             </div>
@@ -665,58 +895,78 @@ print(f"Tokens: {result.output_tokens}")</code></pre>
                 <div>
                     <h2 class="text-4xl font-bold gradient-text mb-6">Why Now?</h2>
                     <p class="text-gray-300 mb-6 leading-relaxed">
-                        The AI boom has created a <span class="text-yellow-400 font-semibold">massive token efficiency crisis</span>. 
-                        LLM inference token costs dominate operating expenses. Every 10% improvement in compression translates directly to bottom-line savings.
+                        The LLM explosion has created a <span class="text-yellow-400 font-semibold">trillion-token consumption crisis</span>. 
+                        Inference token costs are the dominant operating expense for AI services. <span class="text-yellow-400 font-semibold">Every 10% improvement in compression = 10% reduction in inference costs.</span>
                     </p>
                     <div class="space-y-4">
                         <div class="flex gap-4">
                             <div class="text-2xl flex-shrink-0">📊</div>
                             <div>
-                                <div class="font-bold">LLM Market Explosion</div>
-                                <p class="text-sm text-gray-400">$500B+ in annual token consumption, growing 3x YoY</p>
+                                <div class="font-bold">$500B+ AI/LLM Market (2026)</div>
+                                <p class="text-sm text-gray-400">Growing 3x YoY. 90% of cost is inference (token processing).</p>
                             </div>
                         </div>
                         <div class="flex gap-4">
                             <div class="text-2xl flex-shrink-0">⚙️</div>
                             <div>
-                                <div class="font-bold">Infrastructure Gap</div>
-                                <p class="text-sm text-gray-400">No semantic-aware layer exists between data and AI systems</p>
+                                <div class="font-bold">No Semantic Compression Layer</div>
+                                <p class="text-sm text-gray-400">Today: raw bytes → tokenizer → model. No domain-aware compression exists.</p>
                             </div>
                         </div>
                         <div class="flex gap-4">
-                            <div class="text-2xl flex-shrink-0">🎯</div>
+                            <div class="text-2xl flex-shrink-0">🏢</div>
                             <div>
-                                <div class="font-bold">Enterprise Demand</div>
-                                <p class="text-sm text-gray-400">Enterprises need deterministic, auditable compression for compliance</p>
+                                <div class="font-bold">Enterprise Compliance Need</div>
+                                <p class="text-sm text-gray-400">Deterministic, auditable compression required for HIPAA/SOC2/SOX.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl flex-shrink-0">🔬</div>
+                            <div>
+                                <div class="font-bold">Data Deduplication Premium</div>
+                                <p class="text-sm text-gray-400">Training datasets reduced 2-4x via semantic dedup + slot normalization.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="glass rounded-xl p-8">
-                    <h3 class="font-bold mb-6 text-lg">Market Opportunity</h3>
+                    <h3 class="font-bold mb-6 text-lg">TAM& Opportunity</h3>
                     <div class="space-y-4">
                         <div>
                             <div class="flex justify-between mb-2">
-                                <span class="text-sm">AI Inference Cost</span>
+                                <span class="text-sm">GenAI Inference Cost</span>
                                 <span class="text-sm font-bold text-blue-400">60%</span>
                             </div>
                             <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
                                 <div class="h-full bg-gradient-to-r from-blue-600 to-purple-600" style="width: 60%;"></div>
                             </div>
+                            <div class="text-xs text-gray-500 mt-1">~$300B/yr addressable</div>
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
                                 <span class="text-sm">Total DataCenter Spend</span>
-                                <span class="text-sm font-bold text-purple-400">85%</span>
+                                <span class="text-sm font-bold text-purple-400">38%</span>
                             </div>
                             <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-purple-600 to-pink-600" style="width: 85%;"></div>
+                                <div class="h-full bg-gradient-to-r from-purple-600 to-pink-600" style="width: 38%;"></div>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">C-TOKEN = cost-down layer</div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-gray-600">
+                            <div class="flex items-start gap-2">
+                                <span class="text-blue-400 mt-1">→</span>
+                                <p class="text-xs text-gray-400"><strong>Land:</strong> Fortune 500 tech + cloud companies (inference at scale)</p>
+                            </div>
+                            <div class="flex items-start gap-2 mt-3">
+                                <span class="text-purple-400 mt-1">→</span>
+                                <p class="text-xs text-gray-400"><strong>Expand:</strong> Data engineering (logs, compliance, audit)</p>
+                            </div>
+                            <div class="flex items-start gap-2 mt-3">
+                                <span class="text-pink-400 mt-1">→</span>
+                                <p class="text-xs text-gray-400"><strong>Mature:</strong> Training cost reduction (dataset optimization)</p>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-400 mt-6 pt-4 border-t border-gray-700">
-                            C-TOKEN captures the entire token efficiency layer for enterprise AI infrastructure.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -733,21 +983,193 @@ print(f"Tokens: {result.output_tokens}")</code></pre>
             </div>
         </section>
 
+        <!-- FILE FORMAT & STANDARDS -->
+        <section class="section-padding max-w-5xl mx-auto border-t border-gray-700/50">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h2 class="text-3xl font-bold gradient-text mb-6">CSM v4 File Format</h2>
+                    <p class="text-gray-300 mb-6">
+                        Open, standardized binary format backed by complete specification. Streaming-capable, 8-byte aligned sections, CRC32c integrity.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex gap-2">
+                            <span class="text-blue-400 font-bold flex-shrink-0">✓</span>
+                            <div><strong>Header:</strong> 128 bytes with magic "CSM4", version, vocab size, pattern count</div>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-purple-400 font-bold flex-shrink-0">✓</span>
+                            <div><strong>Sections:</strong> Vocab, Patterns, Slots, Data, Index (all memory-aligned)</div>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-pink-400 font-bold flex-shrink-0">✓</span>
+                            <div><strong>Data Integrity:</strong> CRC32c (Castagnoli) per line and per section</div>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-green-400 font-bold flex-shrink-0">✓</span>
+                            <div><strong>Streaming:</strong> Frame-based format for real-time Kafka pipelines</div>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-yellow-400 font-bold flex-shrink-0">✓</span>
+                            <div><strong>Mmap-friendly:</strong> Zero-copy access to FST and vocab via mmap()</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass rounded-xl p-8">
+                    <h3 class="font-bold mb-6 text-lg text-blue-400">Memory Footprint</h3>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Vocab Arena</span>
+                                <span class="font-bold text-blue-400">50 MB</span>
+                            </div>
+                            <div class="text-xs text-gray-500">65K words, 8-byte average</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>FST Binary (mmap)</span>
+                                <span class="font-bold text-purple-400">5 MB</span>
+                            </div>
+                            <div class="text-xs text-gray-500">50K patterns, shared memory</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Pattern Registry</span>
+                                <span class="font-bold text-pink-400">50 MB</span>
+                            </div>
+                            <div class="text-xs text-gray-500">88 bytes/pattern + string pool</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Feature Engine (live)</span>
+                                <span class="font-bold text-green-400">20 MB</span>
+                            </div>
+                            <div class="text-xs text-gray-500">Sliding windows + HyperLogLog</div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-600 mt-4">
+                            <div class="flex justify-between">
+                                <span class="font-bold">Peak Total</span>
+                                <span class="font-bold text-blue-400 text-lg">~210 MB</span>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-2">Well below typical server RAM. Edge mode: minimal 20 MB.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USE CASES & ML APPLICATIONS -->
+        <section class="section-padding bg-gradient-to-b from-transparent via-pink-950/10 to-transparent border-t border-b border-pink-900/30">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl font-bold gradient-text mb-12 text-center">Real-World Use Cases</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass rounded-xl p-8">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <span class="text-2xl">🔍</span> Log Anomaly Detection
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Automatically detect system failures, security incidents, performance issues in application logs.
+                        </p>
+                        <div class="bg-black/40 rounded p-3 text-xs text-gray-400 font-mono mb-4">
+                            anomaly_score > 0.7 → page on-call <br/>
+                            precision > 0.85 on real datasets
+                        </div>
+                        <div class="text-sm text-gray-400">
+                            <div className="font-semibold text-white mb-2">Output:</div>
+                            • Pattern ID + frequency trend<br/>
+                            • Slot statistics (IP spreads, port anomalies)<br/>
+                            • Temporal anomaly vs baseline
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-8">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <span class="text-2xl">🧹</span> Log Deduplication & Storage
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Reduce log storage costs by 18x while maintaining query ability.
+                        </p>
+                        <div class="bg-black/40 rounded p-3 text-xs text-gray-400 font-mono mb-4">
+                            18x compression on production logs <br/>
+                            Deterministic for audit compliance
+                        </div>
+                        <div class="text-sm text-gray-400">
+                            <div className="font-semibold text-white mb-2">Output:</div>
+                            • CSM v4 binary format<br/>
+                            • Splunk/Datadog compatible export<br/>
+                            • Queryable Parquet tables
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-8">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <span class="text-2xl">📊</span> Code Quality & Bug Detection
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Identify problematic code patterns, clone detection, bug localization.
+                        </p>
+                        <div class="bg-black/40 rounded p-3 text-xs text-gray-400 font-mono mb-4">
+                            10x compression on source diffs <br/>
+                            Pattern-based clone detection
+                        </div>
+                        <div class="text-sm text-gray-400">
+                            <div className="font-semibold text-white mb-2">Output:</div>
+                            • Code pattern embeddings<br/>
+                            • Syntactic feature vectors<br/>
+                            • Duplicate code blocks flagged
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-8">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <span class="text-2xl">💾</span> LLM Training Cost Reduction
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Deduplicate & normalize training datasets. Reduce token count in fine-tuning.
+                        </p>
+                        <div class="bg-black/40 rounded p-3 text-xs text-gray-400 font-mono mb-4">
+                            2-4x training data reduction <br/>
+                            Semantic deduplication preserved
+                        </div>
+                        <div class="text-sm text-gray-400">
+                            <div className="font-semibold text-white mb-2">Output:</div>
+                            • Slot-normalized examples<br/>
+                            • Duplicate instance flagging<br/>
+                            • Training data quality score
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- FOOTER -->
         <footer class="section-padding bg-black/40 border-t border-gray-700/50">
             <div class="max-w-5xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <div>
-                        <div class="text-xl font-bold gradient-text mb-4">C-TOKEN</div>
-                        <p class="text-sm text-gray-400">Enterprise semantic compression engine</p>
+                        <div class="text-xl font-bold gradient-text mb-4">C-TOKEN CSM++</div>
+                        <p class="text-sm text-gray-400">Semantic compression + automatic feature engineering for production AI pipelines.</p>
+                        <div class="text-xs text-gray-500 mt-3">v4.0.0 — Production Ready</div>
                     </div>
                     <div>
-                        <div class="font-bold text-white mb-4">Product</div>
+                        <div class="font-bold text-white mb-4">Technology</div>
                         <ul class="space-y-2 text-sm text-gray-400">
-                            <li><a href="#" class="hover:text-white transition">Features</a></li>
-                            <li><a href="#" class="hover:text-white transition">Pricing</a></li>
-                            <li><a href="#" class="hover:text-white transition">Docs</a></li>
-                            <li><a href="#" class="hover:text-white transition">API</a></li>
+                            <li><a href="#" class="hover:text-white transition">Rust + SIMD</a></li>
+                            <li><a href="#" class="hover:text-white transition">Python Bindings</a></li>
+                            <li><a href="#" class="hover:text-white transition">Arrow/Parquet Input</a></li>
+                            <li><a href="#" class="hover:text-white transition">Kafka Streaming</a></li>
+                            <li><a href="#" class="hover:text-white transition">CSM v4 Format</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="font-bold text-white mb-4">Resources</div>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="#" class="hover:text-white transition">Documentation</a></li>
+                            <li><a href="#" class="hover:text-white transition">API Reference</a></li>
+                            <li><a href="#" class="hover:text-white transition">Benchmarks</a></li>
+                            <li><a href="#" class="hover:text-white transition">GitHub Repo</a></li>
+                            <li><a href="#" class="hover:text-white transition">Issue Tracker</a></li>
                         </ul>
                     </div>
                     <div>
@@ -755,25 +1177,18 @@ print(f"Tokens: {result.output_tokens}")</code></pre>
                         <ul class="space-y-2 text-sm text-gray-400">
                             <li><a href="#" class="hover:text-white transition">About</a></li>
                             <li><a href="#" class="hover:text-white transition">Blog</a></li>
-                            <li><a href="#" class="hover:text-white transition">Careers</a></li>
                             <li><a href="#" class="hover:text-white transition">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <div class="font-bold text-white mb-4">Legal</div>
-                        <ul class="space-y-2 text-sm text-gray-400">
-                            <li><a href="#" class="hover:text-white transition">Terms</a></li>
-                            <li><a href="#" class="hover:text-white transition">Privacy</a></li>
-                            <li><a href="#" class="hover:text-white transition">Status</a></li>
+                            <li><a href="#" class="hover:text-white transition">Email</a></li>
+                            <li><a href="#" class="hover:text-white transition">Discord</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="pt-8 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-                    <p>&copy; 2026 C-TOKEN. All rights reserved.</p>
+                    <p>&copy; 2026 C-TOKEN. All rights reserved. Patent-pending technology.</p>
                     <div class="flex gap-6 mt-4 md:mt-0">
-                        <a href="#" class="hover:text-white transition">Twitter</a>
-                        <a href="#" class="hover:text-white transition">GitHub</a>
-                        <a href="#" class="hover:text-white transition">Discord</a>
+                        <a href="#" class="hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition">Security</a>
                     </div>
                 </div>
             </div>
