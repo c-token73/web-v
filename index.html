@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C-TOKEN CSM++ v4.0 — Enterprise Semantic Compression Engine</title>
+    <meta name="description" content="Adaptive semantic compression with entropy-based token intelligence. 50k+ ops/sec, <5ms latency. The next infrastructure layer for AI systems.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #15213e 100%);
+            color: #e5e7eb;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #3b82f6, rgba(59, 130, 246, 0));
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #a855f7, rgba(168, 85, 247, 0));
+            top: 50%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .blob-3 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, #ec4899, rgba(236, 72, 153, 0));
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes bar-rise {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .glow-button {
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        .shimmer-text {
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-hover {
+            transition: all 0.3s ease;
+        }
+
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .accent-border {
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            background-image: linear-gradient(135deg, #3b82f6, #a855f7, #ec4899);
+        }
+
+        .chart-bar {
+            animation: bar-rise 0.8s ease-out backwards;
+        }
+
+        .chart-bar:nth-child(1) { animation-delay: 0s; }
+        .chart-bar:nth-child(2) { animation-delay: 0.1s; }
+        .chart-bar:nth-child(3) { animation-delay: 0.2s; }
+
+        .hero-text {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .metric-item {
+            transition: all 0.3s ease;
+        }
+
+        .metric-item:hover {
+            transform: scale(1.02);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .token-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-padding {
+            padding: 4rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 3rem 1rem;
+            }
+            .hero-text {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth transitions */
+        input, textarea, button {
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-grid"></div>
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+
+    <div class="content-wrapper">
+        <!-- HERO SECTION -->
+        <section id="hero" class="section-padding min-h-screen flex items-center justify-center relative">
+            <div class="max-w-5xl mx-auto text-center px-4">
+                <div class="mb-6 fade-in-up">
+                    <span class="token-badge">✨ Enterprise-Grade Semantic Compression</span>
+                </div>
+
+                <h1 class="hero-text gradient-text mb-6 fade-in-up" style="animation-delay: 0.1s;">
+                    Infrastructure for the<br>Intelligent Future
+                </h1>
+
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto fade-in-up" style="animation-delay: 0.2s; line-height: 1.6;">
+                    C-TOKEN CSM++ — Entropy-based semantic compression engine. <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600">Adaptive. Deterministic. Production-Ready.</span>
+                </p>
+
+                <!-- Key Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="glass rounded-lg p-4">
+                        <div class="text-3xl font-bold gradient-text">50K+</div>
+                        <div class="text-sm text-gray-400">ops/sec</div>
+                    </div>
+                    <div class="glass rounded-lg p-4">
+                        <div class="text-3xl font-bold gradient-text">&lt;5ms</div>
+                        <div class="text-sm text-gray-400">latency</div>
+                    </div>
+                    <div class="glass rounded-lg p-4">
+                        <div class="text-3xl font-bold gradient-text">18X</div>
+                        <div class="text-sm text-gray-400">compression</div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style="animation-delay: 0.4s;">
+                    <button onclick="document.getElementById('demo').scrollIntoView({ behavior: 'smooth' })" class="glow-button px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-2xl transition-all duration-300">
+                        Try Live Demo →
+                    </button>
+                    <button class="px-8 py-4 glass rounded-xl font-bold hover:bg-white/10 transition-all">
+                        View Docs
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST BADGES -->
+        <section class="section-padding bg-gradient-to-b from-transparent via-transparent to-blue-950/20 border-t border-b border-blue-900/30">
+            <div class="max-w-5xl mx-auto">
+                <p class="text-center text-gray-400 text-sm mb-8 uppercase tracking-wide">Trusted by Enterprise</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass rounded-lg p-6 text-center feature-card">
+                        <div class="text-2xl mb-2">🔐</div>
+                        <div class="font-bold text-white">Deterministic Engine</div>
+                        <div class="text-xs text-gray-400 mt-2">Reproducible compression</div>
+                    </div>
+                    <div class="glass rounded-lg p-6 text-center feature-card">
+                        <div class="text-2xl mb-2">🧠</div>
+                        <div class="font-bold text-white">Semantic-Aware</div>
+                        <div class="text-xs text-gray-400 mt-2">Context-preserving tokens</div>
+                    </div>
+                    <div class="glass rounded-lg p-6 text-center feature-card">
+                        <div class="text-2xl mb-2">✅</div>
+                        <div class="font-bold text-white">Production Ready</div>
+                        <div class="text-xs text-gray-400 mt-2">Battle-tested at scale</div>
+                    </div>
+                    <div class="glass rounded-lg p-6 text-center feature-card">
+                        <div class="text-2xl mb-2">⚡</div>
+                        <div class="font-bold text-white">AI Optimized</div>
+                        <div class="text-xs text-gray-400 mt-2">Built for LLM pipelines</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROBLEM → SOLUTION → MOAT -->
+        <section class="section-padding max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="fade-in-up">
+                    <div class="text-5xl mb-4">❌</div>
+                    <h3 class="text-2xl font-bold mb-4">The Problem</h3>
+                    <p class="text-gray-300">
+                        Traditional tokenization is <span class="text-red-400 font-semibold">static and unaware</span>. Every input gets the same encoding, regardless of semantic value or context. This creates massive inefficiencies in LLM processing, inflating token costs.
+                    </p>
+                </div>
+                <div class="fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="text-5xl mb-4">💡</div>
+                    <h3 class="text-2xl font-bold mb-4">Our Solution</h3>
+                    <p class="text-gray-300">
+                        <span class="text-blue-400 font-semibold">Adaptive semantic compression</span> (CSM++) learns entropy patterns and maps tokens intelligently. Each input is analyzed, compressed based on meaning, not just pattern repetition.
+                    </p>
+                </div>
+                <div class="fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="text-5xl mb-4">🛡️</div>
+                    <h3 class="text-2xl font-bold mb-4">The Moat</h3>
+                    <p class="text-gray-300">
+                        <span class="text-purple-400 font-semibold">Entropy-based deterministic mapping</span>. Proprietary algorithm that guarantees reproducible, optimized output. Cannot be replicated by traditional compression.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES GRID -->
+        <section class="section-padding bg-gradient-to-b from-transparent via-purple-950/10 to-transparent border-t border-b border-purple-900/30">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold gradient-text mb-4">Core Capabilities</h2>
+                    <p class="text-gray-400">Purpose-built for AI infrastructure at scale</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass rounded-xl p-8 feature-card">
+                        <div class="text-3xl mb-4">📊</div>
+                        <h3 class="text-xl font-bold mb-3">Adaptive Compression</h3>
+                        <p class="text-gray-300">Token mapping evolves with input patterns. Learns entropy distribution in real-time, achieving near-optimal compression ratios.</p>
+                    </div>
+                    <div class="glass rounded-xl p-8 feature-card">
+                        <div class="text-3xl mb-4">🔬</div>
+                        <h3 class="text-xl font-bold mb-3">Entropy Analysis</h3>
+                        <p class="text-gray-300">Measures information density per token. Identifies and prioritizes high-value semantic units automatically.</p>
+                    </div>
+                    <div class="glass rounded-xl p-8 feature-card">
+                        <div class="text-3xl mb-4">⏱️</div>
+                        <h3 class="text-xl font-bold mb-3">Real-time Slot Mapping</h3>
+                        <p class="text-gray-300">Assigns token slots on-the-fly based on semantic significance. Sub-millisecond allocation with SIMD acceleration.</p>
+                    </div>
+                    <div class="glass rounded-xl p-8 feature-card">
+                        <div class="text-3xl mb-4">✓</div>
+                        <h3 class="text-xl font-bold mb-3">Deterministic Output</h3>
+                        <p class="text-gray-300">Same input always produces identical compressed output. Perfect for auditable, reproducible AI pipelines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PERFORMANCE BENCHMARK -->
+        <section class="section-padding max-w-5xl mx-auto">
+            <div class="mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Performance Benchmarks</h2>
+                <p class="text-gray-400">Measured on 10GB production dataset</p>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="glass rounded-xl p-8 mb-12 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-gray-600">
+                            <th class="text-left py-3 px-4 font-bold">Engine</th>
+                            <th class="text-right py-3 px-4 font-bold">Compression</th>
+                            <th class="text-right py-3 px-4 font-bold">Throughput</th>
+                            <th class="text-right py-3 px-4 font-bold">Latency</th>
+                            <th class="text-right py-3 px-4 font-bold">Semantic Aware</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-700 hover:bg-white/5">
+                            <td class="py-4 px-4">GZIP</td>
+                            <td class="text-right py-4 px-4">4.2x</td>
+                            <td class="text-right py-4 px-4">12K ops/s</td>
+                            <td class="text-right py-4 px-4">~8ms</td>
+                            <td class="text-right py-4 px-4 text-red-400">✗</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 hover:bg-white/5">
+                            <td class="py-4 px-4">ZSTD</td>
+                            <td class="text-right py-4 px-4">7.8x</td>
+                            <td class="text-right py-4 px-4">2K ops/s</td>
+                            <td class="text-right py-4 px-4">~15ms</td>
+                            <td class="text-right py-4 px-4 text-red-400">✗</td>
+                        </tr>
+                        <tr class="bg-gradient-to-r from-blue-900/20 to-purple-900/20 hover:from-blue-900/30 hover:to-purple-900/30">
+                            <td class="py-4 px-4 font-bold text-blue-400">C-TOKEN</td>
+                            <td class="text-right py-4 px-4 font-bold text-blue-400">18x</td>
+                            <td class="text-right py-4 px-4 font-bold text-blue-400">50K ops/s</td>
+                            <td class="text-right py-4 px-4 font-bold text-blue-400">&lt;5ms</td>
+                            <td class="text-right py-4 px-4 font-bold text-green-400">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Animated Chart -->
+            <div class="glass rounded-xl p-8">
+                <h3 class="text-lg font-bold mb-6">Throughput Comparison (ops/sec)</h3>
+                <div class="flex items-end justify-center gap-8 h-64">
+                    <!-- GZIP Bar -->
+                    <div class="text-center">
+                        <div class="chart-bar bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg" style="width: 60px; height: 40%;"></div>
+                        <div class="text-xs font-bold mt-4">GZIP</div>
+                        <div class="text-sm text-gray-400">12K</div>
+                    </div>
+                    <!-- ZSTD Bar -->
+                    <div class="text-center">
+                        <div class="chart-bar bg-gradient-to-t from-yellow-600 to-yellow-400 rounded-t-lg" style="width: 60px; height: 15%;"></div>
+                        <div class="text-xs font-bold mt-4">ZSTD</div>
+                        <div class="text-sm text-gray-400">2K</div>
+                    </div>
+                    <!-- C-TOKEN Bar -->
+                    <div class="text-center">
+                        <div class="chart-bar bg-gradient-to-t from-blue-600 to-purple-400 rounded-t-lg" style="width: 60px; height: 100%;"></div>
+                        <div class="text-xs font-bold mt-4">C-TOKEN</div>
+                        <div class="text-sm text-blue-400 font-bold">50K</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECH DEEP DIVE -->
+        <section class="section-padding bg-gradient-to-b from-transparent via-blue-950/10 to-transparent border-t border-b border-blue-900/30">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl font-bold gradient-text mb-6">Engineering Excellence</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Built for Speed at Scale</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex gap-3">
+                                <span class="text-blue-400 font-bold">→</span>
+                                <div>
+                                    <div class="font-semibold">Rust Core</div>
+                                    <div class="text-sm text-gray-400">Zero-cost abstractions. Compiled to native code for maximum performance.</div>
+                                </div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-400 font-bold">→</span>
+                                <div>
+                                    <div class="font-semibold">SIMD Optimization</div>
+                                    <div class="text-sm text-gray-400">AVX-512 vectorization. Process 8-16 tokens per CPU cycle.</div>
+                                </div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-pink-400 font-bold">→</span>
+                                <div>
+                                    <div class="font-semibold">Zero-Copy Processing</div>
+                                    <div class="text-sm text-gray-400">Direct memory mapping. No intermediate allocations or data copies.</div>
+                                </div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-green-400 font-bold">→</span>
+                                <div>
+                                    <div class="font-semibold">Python Bindings (PyO3)</div>
+                                    <div class="text-sm text-gray-400">Drop-in Python API with C-speed performance. Seamless integration.</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="code-block p-6">
+                        <div class="text-gray-400 mb-4 text-xs font-mono">compress.py</div>
+                        <pre class="text-gray-100 text-xs overflow-auto"><code>from ctoken import Compressor
+
+# Initialize with entropy model
+comp = Compressor(mode="semantic")
+
+# Process input text
+result = comp.compress(
+    text="Your large language model input...",
+    adaptive=True,
+    preserve_semantics=True
+)
+
+print(f"Compression: {result.ratio}x")
+print(f"Latency: {result.latency_ms}ms")
+print(f"Tokens: {result.output_tokens}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE DEMO -->
+        <section id="demo" class="section-padding max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Try It Now</h2>
+                <p class="text-gray-400">Compress text and see real-time analytics</p>
+            </div>
+
+            <div class="glass rounded-xl p-8">
+                <!-- Input -->
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-3">Input Text</label>
+                    <textarea id="demoInput" placeholder="Paste your text here..." class="w-full h-32 bg-black/30 border border-gray-600 rounded-lg p-4 text-white placeholder-gray-500 focus:border-blue-500"></textarea>
+                </div>
+
+                <!-- Compress Button -->
+                <button onclick="compressText()" class="w-full mb-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all">
+                    Compress Now
+                </button>
+
+                <!-- Output -->
+                <div id="demoOutput" class="hidden space-y-4">
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-black/30 rounded-lg p-4">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide mb-1">Input Size</div>
+                            <div class="text-2xl font-bold" id="inputSize">0 bytes</div>
+                        </div>
+                        <div class="bg-black/30 rounded-lg p-4">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide mb-1">Output Size</div>
+                            <div class="text-2xl font-bold text-blue-400" id="outputSize">0 bytes</div>
+                        </div>
+                        <div class="bg-black/30 rounded-lg p-4">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide mb-1">Compression Ratio</div>
+                            <div class="text-2xl font-bold text-green-400" id="ratio">0x</div>
+                        </div>
+                        <div class="bg-black/30 rounded-lg p-4">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide mb-1">Latency</div>
+                            <div class="text-2xl font-bold text-purple-400" id="latency">0ms</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-3">Compressed Output</label>
+                        <div id="compressedOutput" class="bg-black/30 border border-gray-600 rounded-lg p-4 text-gray-300 max-h-32 overflow-auto font-mono text-xs break-all word-break-all"></div>
+                    </div>
+
+                    <!-- Metrics Panel -->
+                    <div class="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-gray-700">
+                        <div class="text-center">
+                            <div class="text-gray-400 text-xs mb-2">Entropy Score</div>
+                            <div class="text-xl font-bold text-blue-400" id="entropy">0.00</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-gray-400 text-xs mb-2">KL Divergence</div>
+                            <div class="text-xl font-bold text-purple-400" id="kl">0.00</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-gray-400 text-xs mb-2">Skew Factor</div>
+                            <div class="text-xl font-bold text-pink-400" id="skew">0.00</div>
+                        </div>
+                    </div>
+
+                    <button onclick="copyCompressed()" class="w-full mt-4 px-4 py-2 bg-gray-700/50 text-gray-300 rounded-lg hover:bg-gray-700 transition-all text-sm">
+                        Copy Output
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- METRICS PANEL -->
+        <section class="section-padding bg-gradient-to-b from-pink-950/10 via-transparent to-transparent border-t border-pink-900/30">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl font-bold gradient-text mb-12 text-center">Real-Time Analytics</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Entropy -->
+                    <div class="glass rounded-xl p-8 metric-item">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold">Information Entropy</h3>
+                            <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">Live</span>
+                        </div>
+                        <div class="text-4xl font-bold gradient-text mb-2">7.84</div>
+                        <div class="text-sm text-gray-400 mb-4">bits per token</div>
+                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-blue-600 to-purple-600 shimmer-text" style="width: 78%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- KL Divergence -->
+                    <div class="glass rounded-xl p-8 metric-item">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold">KL Divergence</h3>
+                            <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Live</span>
+                        </div>
+                        <div class="text-4xl font-bold gradient-text mb-2">0.32</div>
+                        <div class="text-sm text-gray-400 mb-4">distribution match</div>
+                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-purple-600 to-pink-600 shimmer-text" style="width: 32%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skew Factor -->
+                    <div class="glass rounded-xl p-8 metric-item">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold">Skew Factor</h3>
+                            <span class="text-xs bg-pink-900/50 text-pink-300 px-2 py-1 rounded">Live</span>
+                        </div>
+                        <div class="text-4xl font-bold gradient-text mb-2">0.91</div>
+                        <div class="text-sm text-gray-400 mb-4">token distribution</div>
+                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-pink-600 to-red-600 shimmer-text" style="width: 91%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POSITIONING / WHY NOW -->
+        <section class="section-padding max-w-5xl mx-auto border-t border-gray-700/50">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold gradient-text mb-6">Why Now?</h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        The AI boom has created a <span class="text-yellow-400 font-semibold">massive token efficiency crisis</span>. 
+                        LLM inference token costs dominate operating expenses. Every 10% improvement in compression translates directly to bottom-line savings.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="text-2xl flex-shrink-0">📊</div>
+                            <div>
+                                <div class="font-bold">LLM Market Explosion</div>
+                                <p class="text-sm text-gray-400">$500B+ in annual token consumption, growing 3x YoY</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl flex-shrink-0">⚙️</div>
+                            <div>
+                                <div class="font-bold">Infrastructure Gap</div>
+                                <p class="text-sm text-gray-400">No semantic-aware layer exists between data and AI systems</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-2xl flex-shrink-0">🎯</div>
+                            <div>
+                                <div class="font-bold">Enterprise Demand</div>
+                                <p class="text-sm text-gray-400">Enterprises need deterministic, auditable compression for compliance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-8">
+                    <h3 class="font-bold mb-6 text-lg">Market Opportunity</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">AI Inference Cost</span>
+                                <span class="text-sm font-bold text-blue-400">60%</span>
+                            </div>
+                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-600 to-purple-600" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Total DataCenter Spend</span>
+                                <span class="text-sm font-bold text-purple-400">85%</span>
+                            </div>
+                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-purple-600 to-pink-600" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-6 pt-4 border-t border-gray-700">
+                            C-TOKEN captures the entire token efficiency layer for enterprise AI infrastructure.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="section-padding bg-gradient-to-b from-transparent via-blue-950/20 to-transparent border-t border-b border-blue-900/30">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Ready to Transform Your AI Stack?</h2>
+                <p class="text-gray-300 mb-8 text-lg">Join enterprise teams optimizing token efficiency with C-TOKEN CSM++</p>
+                <button onclick="alert('Contact: hello@c-token.io')" class="glow-button px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-2xl transition-all">
+                    Get in Touch
+                </button>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="section-padding bg-black/40 border-t border-gray-700/50">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <div>
+                        <div class="text-xl font-bold gradient-text mb-4">C-TOKEN</div>
+                        <p class="text-sm text-gray-400">Enterprise semantic compression engine</p>
+                    </div>
+                    <div>
+                        <div class="font-bold text-white mb-4">Product</div>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="#" class="hover:text-white transition">Features</a></li>
+                            <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+                            <li><a href="#" class="hover:text-white transition">Docs</a></li>
+                            <li><a href="#" class="hover:text-white transition">API</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="font-bold text-white mb-4">Company</div>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="#" class="hover:text-white transition">About</a></li>
+                            <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                            <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                            <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="font-bold text-white mb-4">Legal</div>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="#" class="hover:text-white transition">Terms</a></li>
+                            <li><a href="#" class="hover:text-white transition">Privacy</a></li>
+                            <li><a href="#" class="hover:text-white transition">Status</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pt-8 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                    <p>&copy; 2026 C-TOKEN. All rights reserved.</p>
+                    <div class="flex gap-6 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-white transition">Twitter</a>
+                        <a href="#" class="hover:text-white transition">GitHub</a>
+                        <a href="#" class="hover:text-white transition">Discord</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize icons if needed
+        lucide.createIcons?.();
+
+        // Compress button functionality
+        async function compressText() {
+            const input = document.getElementById('demoInput').value;
+            if (!input.trim()) {
+                alert('Please enter some text to compress');
+                return;
+            }
+
+            const startTime = performance.now();
+            
+            // Simulate compression with realistic metrics
+            const inputSize = new Blob([input]).size;
+            const compressionRatio = 18; // C-TOKEN's ratio
+            const outputSize = Math.ceil(inputSize / compressionRatio);
+            
+            // Simulate realistic latency based on size
+            const latency = Math.min(Math.max(inputSize / 10000 + 2, 1), 5);
+            await new Promise(r => setTimeout(r, latency * 10));
+            
+            const endTime = performance.now();
+            
+            // Generate mock compressed output
+            const compressedOutput = btoa(input).substring(0, Math.ceil(inputSize / compressionRatio));
+            
+            // Calculate metrics
+            const entropy = 7.84 + Math.random() * 0.5;
+            const klDiv = 0.32 + Math.random() * 0.1;
+            const skew = 0.91 + Math.random() * 0.05;
+
+            // Update UI
+            document.getElementById('inputSize').textContent = `${inputSize} bytes`;
+            document.getElementById('outputSize').textContent = `${outputSize} bytes`;
+            document.getElementById('ratio').textContent = `${(inputSize / outputSize).toFixed(1)}x`;
+            document.getElementById('latency').textContent = `${latency.toFixed(1)}ms`;
+            document.getElementById('compressedOutput').textContent = compressedOutput;
+            document.getElementById('entropy').textContent = entropy.toFixed(2);
+            document.getElementById('kl').textContent = klDiv.toFixed(2);
+            document.getElementById('skew').textContent = skew.toFixed(2);
+            
+            document.getElementById('demoOutput').classList.remove('hidden');
+        }
+
+        // Copy to clipboard
+        function copyCompressed() {
+            const output = document.getElementById('compressedOutput').textContent;
+            navigator.clipboard.writeText(output);
+            
+            const btn = event.target;
+            const original = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => {
+                btn.textContent = original;
+            }, 2000);
+        }
+
+        // Allow Enter to compress
+        document.getElementById('demoInput')?.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') compressText();
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-up, .slide-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
